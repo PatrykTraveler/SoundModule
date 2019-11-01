@@ -20,8 +20,8 @@ public class SoundModuleModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void sampleMethod(String stringArgument, int numberArgument, Callback callback) {
+    public void sampleMethod(Callback callback) {
         // TODO: Implement some actually useful functionality
-        callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
+        callback.invoke("Hello");
     }
 }
