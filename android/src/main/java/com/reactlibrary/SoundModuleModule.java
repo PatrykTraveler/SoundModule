@@ -6,7 +6,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 
 public class SoundModuleModule extends ReactContextBaseJavaModule {
-    private Simulator simulator;
+    private Thread thread;
     private final ReactApplicationContext reactContext;
 
     public SoundModuleModule(ReactApplicationContext reactContext) {
@@ -21,12 +21,12 @@ public class SoundModuleModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startSimulation() {
-        simulator = new Simulator(reactContext);
-        simulator.runSimulation();
+        Simulator simulator = new Simulator(reactContext);
+        Thread thread = new Thread(simulator);
     }
 
     @ReactMethod
     public void stopSimulation(){
-        simulator.stopSimulation();
+        thread.interrupt();
     }
 }
