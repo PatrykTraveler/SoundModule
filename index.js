@@ -15,4 +15,12 @@ function registerForKeyEvents(touchKey, releaseKey) {
   });
 }
 
+function startSimulation() {
+  SoundModule.startSimulation();
+}
+
+function stopSimulation() {
+  SoundModule.stopSimulation();
+}
+
 export { SoundModule, registerForKeyEvents };

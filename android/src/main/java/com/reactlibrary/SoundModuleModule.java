@@ -20,7 +20,7 @@ public class SoundModuleModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void startSimulation(Callback touchKey, Callback releaseKey) {
+    public void startSimulation() {
         simulator = new Simulator(reactContext);
         simulator.runSimulation();
     }
