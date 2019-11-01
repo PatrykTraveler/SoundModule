@@ -6,7 +6,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 
 public class SoundModuleModule extends ReactContextBaseJavaModule {
-
+    private Simulator simulator;
     private final ReactApplicationContext reactContext;
 
     public SoundModuleModule(ReactApplicationContext reactContext) {
@@ -20,8 +20,13 @@ public class SoundModuleModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void sampleMethod(Callback callback) {
-        // TODO: Implement some actually useful functionality
-        callback.invoke("Hello");
+    public void startSimulation(Callback touchKey, Callback releaseKey) {
+        simulator = new Simulator(touchKey, releaseKey);
+        simulator.runSimulation();
+    }
+
+    @ReactMethod
+    public void stopSimulation(){
+        simulator.stopSimulation();
     }
 }
