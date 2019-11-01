@@ -42,10 +42,10 @@ public class Simulator {
             @Override
             public void run() {
                 while (true) {
-                    int note = random.nextInt() % keyRange + 60;
+                    int note = random.nextInt(keyRange) + 60;
                     touchKey(note);
                     try {
-                        Thread.sleep(100 * (random.nextInt() % 5 + 1));
+                        Thread.sleep(100 * (random.nextInt(5) + 1));
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
