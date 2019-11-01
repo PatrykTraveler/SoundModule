@@ -2,7 +2,7 @@ import { NativeEventEmitter, NativeModules } from "react-native";
 
 const { SoundModule } = NativeModules;
 
-export default function registerForKeyEvents(touchKey, releaseKey) {
+function registerForKeyEvents(touchKey, releaseKey) {
   const eventEmitter = new NativeEventEmitter(SoundModule);
   eventEmitter.addListener("KeyEvent", event => {
     if (event.type == 1) {
@@ -14,3 +14,5 @@ export default function registerForKeyEvents(touchKey, releaseKey) {
     }
   });
 }
+
+export { SoundModule, registerForKeyEvents };
