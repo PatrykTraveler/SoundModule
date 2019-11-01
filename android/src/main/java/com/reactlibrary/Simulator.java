@@ -54,7 +54,7 @@ public class Simulator {
             }
         };
         simulationThread = new Thread(myRunnable);
-        simulationThread.run();
+        simulationThread.start();
     }
 
     public void stopSimulation() {
