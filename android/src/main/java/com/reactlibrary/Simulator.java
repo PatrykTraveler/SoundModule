@@ -48,7 +48,7 @@ public class Simulator implements Runnable {
     @Override
     public void run() {
         running.set(true);
-        while (true) {
+        while (running.get()) {
             int note = random.nextInt(keyRange) + 60;
             touchKey(note);
             try {
