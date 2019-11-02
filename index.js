@@ -23,4 +23,4 @@ function stopSimulation() {
   SoundModule.stopSimulation();
 }
 
-export { SoundModule, registerForKeyEvents };
+export { startSimulation, stopSimulation, registerForKeyEvents };
