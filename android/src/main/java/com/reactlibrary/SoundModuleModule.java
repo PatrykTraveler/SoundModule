@@ -22,7 +22,7 @@ public class SoundModuleModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void startSimulation() {
         Simulator simulator = new Simulator(reactContext);
-        Thread thread = new Thread(simulator);
+        thread = new Thread(simulator);
     }
 
     @ReactMethod
