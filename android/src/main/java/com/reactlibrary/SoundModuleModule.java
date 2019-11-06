@@ -1,17 +1,25 @@
 package com.reactlibrary;
 
+import android.content.Context;
+import android.media.midi.MidiDevice;
+import android.media.midi.MidiDeviceInfo;
+import android.media.midi.MidiManager;
+import android.media.midi.MidiOutputPort;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
+import com.reactlibrary.midi.MidiHandler;
 
 public class SoundModuleModule extends ReactContextBaseJavaModule {
-    private Thread thread;
     private final ReactApplicationContext reactContext;
+    private MidiHandler midiHandler;
 
     public SoundModuleModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+        midiHandler = new MidiHandler(reactContext); // USB midi device handler
+        midiHandler.startDriver(); // This is starting the driver which plays the sound
     }
 
     @Override
@@ -20,14 +28,24 @@ public class SoundModuleModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void startSimulation() {
-        Simulator simulator = new Simulator(reactContext);
-        thread = new Thread(simulator);
-        thread.start();
+    public void connectMidiDevice(){
+        final MidiManager midiManager = (MidiManager)this.reactContext.getSystemService(ReactApplicationContext.MIDI_SERVICE);
+
+        midiManager.registerDeviceCallback(new MidiManager.DeviceCallback() {
+            @Override
+            public void onDeviceAdded( MidiDeviceInfo info ) {
+                midiManager.openDevice(info,onDeviceOpenedListener, null);
+            }
+        }, null);
     }
 
-    @ReactMethod
-    public void stopSimulation(){
-        thread.interrupt();
-    }
+    private MidiManager.OnDeviceOpenedListener onDeviceOpenedListener = new MidiManager.OnDeviceOpenedListener() {
+        @Override
+        public void onDeviceOpened(MidiDevice device) {
+            if (device != null) {
+                MidiOutputPort outputPort = device.openOutputPort(0);
+                outputPort.connect(midiHandler);
+            }
+        }
+    };
 }
