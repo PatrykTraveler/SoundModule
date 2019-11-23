@@ -16,12 +16,4 @@ function registerForKeyEvents(touchKey, releaseKey, checkAccuracy) {
   });
 }
 
-function startSimulation() {
-  SoundModule.startSimulation();
-}
-
-function stopSimulation() {
-  SoundModule.stopSimulation();
-}
-
-export { startSimulation, stopSimulation, registerForKeyEvents };
+export { registerForKeyEvents };
