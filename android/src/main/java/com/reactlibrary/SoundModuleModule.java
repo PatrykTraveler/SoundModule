@@ -1,6 +1,5 @@
 package com.reactlibrary;
 
-import android.content.Context;
 import android.media.midi.MidiDevice;
 import android.media.midi.MidiDeviceInfo;
 import android.media.midi.MidiManager;
@@ -19,7 +18,7 @@ public class SoundModuleModule extends ReactContextBaseJavaModule {
         super(reactContext);
         this.reactContext = reactContext;
         midiHandler = new MidiHandler(reactContext); // USB midi device handler
-        midiHandler.startDriver(); // This is starting the driver which plays the sound
+        //midiHandler.startDriver(); // This is starting the driver which plays the sound
     }
 
     @Override
