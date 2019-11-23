@@ -2,7 +2,8 @@ import { NativeEventEmitter, NativeModules } from "react-native";
 
 const { SoundModule } = NativeModules;
 
-function registerForKeyEvents(touchKey, releaseKey, checkAccuracy) {
+function init(touchKey, releaseKey, checkAccuracy) {
+  SoundModule.connectMidiDevice();
   const eventEmitter = new NativeEventEmitter(SoundModule);
   eventEmitter.addListener("KeyEvent", event => {
     if (event.type == 1) {
@@ -16,4 +17,4 @@ function registerForKeyEvents(touchKey, releaseKey, checkAccuracy) {
   });
 }
 
-export { registerForKeyEvents };
+export { init };
