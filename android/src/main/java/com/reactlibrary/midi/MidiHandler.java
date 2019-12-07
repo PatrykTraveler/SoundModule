@@ -15,9 +15,9 @@ public class MidiHandler extends MidiReceiver {
         this.reactApplicationContext = reactApplicationContext;
     }
 
-//    public void startDriver() {
-//        midiDriver.start();
-//    }
+    public void startDriver() {
+        //midiDriver.start();
+    }
 
     public void sendEvent(String eventName, WritableMap params) {
         this.reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
@@ -37,7 +37,7 @@ public class MidiHandler extends MidiReceiver {
         else{
             type = 0;
         }
-        params.putInt("type", msg[0]);
+        params.putInt("type", type);
         params.putInt("note", msg[1]);
         sendEvent("KeyEvent", params);
     }
