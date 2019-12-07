@@ -32,16 +32,9 @@ public class MidiHandler extends MidiReceiver {
         //midiDriver.write(msg);
 
         WritableMap params = Arguments.createMap();
-//        int type = -1;
-//        if(msg[0] == (byte)0x90){
-//            type = 1;
-//        }
-//        else{
-//            type = 0;
-//        }
-//        params.putInt("type", msg[0]);
-//        params.putInt("note", msg[1]);
-        params.putString("message", Arrays.toString(msg));
+
+        params.putInt("type", msg[1]);
+        params.putInt("note", msg[2]);
         sendEvent("KeyEvent", params);
     }
 }
