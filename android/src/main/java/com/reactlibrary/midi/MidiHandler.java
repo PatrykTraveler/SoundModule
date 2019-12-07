@@ -7,6 +7,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
+import java.util.Arrays;
+
 public class MidiHandler extends MidiReceiver {
     private ReactApplicationContext reactApplicationContext;
     //private final MidiDriver midiDriver = new MidiDriver();
@@ -39,7 +41,7 @@ public class MidiHandler extends MidiReceiver {
 //        }
 //        params.putInt("type", msg[0]);
 //        params.putInt("note", msg[1]);
-        params.putString("message", msg.toString());
+        params.putString("message", Arrays.toString(msg));
         sendEvent("KeyEvent", params);
     }
 }
