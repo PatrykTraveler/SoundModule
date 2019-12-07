@@ -37,8 +37,9 @@ public class MidiHandler extends MidiReceiver {
 //        else{
 //            type = 0;
 //        }
-        params.putInt("type", msg[0]);
-        params.putInt("note", msg[1]);
+//        params.putInt("type", msg[0]);
+//        params.putInt("note", msg[1]);
+        params.putString("message", msg.toString());
         sendEvent("KeyEvent", params);
     }
 }
