@@ -57,6 +57,11 @@ repositories {
     maven { url "https://jitpack.io" }
     google()
     jcenter()
+    allprojects {
+        repositories {
+            maven { url "https://jitpack.io" }
+        }
+    }
 }
 
 dependencies {
@@ -64,6 +69,7 @@ dependencies {
     // https://github.com/facebook/react-native/blob/0.61-stable/template/android/app/build.gradle#L192
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
+    implementation 'com.github.billthefarmer:mididriver:v1.17'
 }
 
 def configureReactNativePom(def pom) {

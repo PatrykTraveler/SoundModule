@@ -18,7 +18,7 @@ public class SoundModuleModule extends ReactContextBaseJavaModule {
         super(reactContext);
         this.reactContext = reactContext;
         midiHandler = new MidiHandler(reactContext); // USB midi device handler
-        //midiHandler.startDriver(); // This is starting the driver which plays the sound
+        midiHandler.startDriver(); // This is starting the driver which plays the sound
     }
 
     @Override
