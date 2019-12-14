@@ -12,11 +12,6 @@ buildscript {
         repositories {
             google()
             jcenter()
-            allprojects {
-                repositories {
-                    maven { url "https://jitpack.io" }
-                }
-            }
         }
         dependencies {
             classpath 'com.android.tools.build:gradle:3.4.1'
@@ -34,6 +29,12 @@ def DEFAULT_COMPILE_SDK_VERSION = 28
 def DEFAULT_BUILD_TOOLS_VERSION = "28.0.3"
 def DEFAULT_MIN_SDK_VERSION = 23
 def DEFAULT_TARGET_SDK_VERSION = 28
+
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
 
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
@@ -62,11 +63,6 @@ repositories {
     maven { url "https://jitpack.io" }
     google()
     jcenter()
-    allprojects {
-        repositories {
-            maven { url "https://jitpack.io" }
-        }
-    }
 }
 
 dependencies {
