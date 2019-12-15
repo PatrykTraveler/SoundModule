@@ -11,18 +11,17 @@ public class MidiSoundPlayer implements SoundPlayer {
 
     public MidiSoundPlayer() {
         midiDriver = new MidiDriver();
+        midiDriver.start();
     }
 
     @Override
     public void noteOn(int note) {
-        midiDriver.start();
         sendMidi(NOTE_ON, note, MAX_VELOCITY);
     }
 
     @Override
     public void noteOff(int note) {
         sendMidi(NOTE_OFF, note, MIN_VELOCITY);
-        midiDriver.stop();
     }
 
     public void sendMidi(int event, int note, int velocity) {
