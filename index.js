@@ -2,7 +2,7 @@ import { NativeEventEmitter, NativeModules } from "react-native";
 
 const { SoundModule } = NativeModules;
 
-function init(touchKey, releaseKey) {
+function setUpMidi(touchKey, releaseKey) {
   SoundModule.connectMidiDevice();
   const eventEmitter = new NativeEventEmitter(SoundModule);
   eventEmitter.addListener("KeyEvent", event => {
@@ -16,4 +16,12 @@ function init(touchKey, releaseKey) {
   });
 }
 
-export { init };
+function playNote(note) {
+  SoundModule.playNote(note);
+}
+
+function stopNote(note) {
+  SoundModule.stopNote(note);
+}
+
+export { setUpMidi, playNote, stopNote };
