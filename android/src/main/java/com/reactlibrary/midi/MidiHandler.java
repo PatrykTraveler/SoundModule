@@ -21,20 +21,26 @@ public class MidiHandler extends MidiReceiver {
         midiDriver.start();
     }
 
-    public void sendEvent(String eventName, WritableMap params) {
-        this.reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit(eventName, params);
+    public void stopDriver() {
+        midiDriver.stop();
     }
-
 
     @Override
     public void onSend(byte[] msg, int offset, int count, long timestamp) {
         midiDriver.write(msg);
+        sendMidiEvent(msg);
+    }
 
+    private void sendMidiEvent(byte[] msg) {
         WritableMap params = Arguments.createMap();
 
         params.putInt("type", msg[1]);
         params.putInt("note", msg[2]);
         sendEvent("KeyEvent", params);
+    }
+
+    private void sendEvent(String eventName, WritableMap params) {
+        this.reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, params);
     }
 }
