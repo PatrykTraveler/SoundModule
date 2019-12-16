@@ -19,7 +19,7 @@ public class MidiSoundPlayer implements SoundPlayer {
     }
 
     @Override
-    public void playNote(final int note, long duration) {
+    public void playNote(final int note, int duration) {
         ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
         Runnable noteOffTask = new Runnable() {
             @Override
