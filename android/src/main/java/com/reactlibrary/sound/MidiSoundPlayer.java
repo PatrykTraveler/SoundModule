@@ -30,6 +30,7 @@ public class MidiSoundPlayer implements SoundPlayer {
 
         sendMidi(NOTE_ON, note, MAX_VELOCITY);
         service.schedule(noteOffTask, duration, TimeUnit.MILLISECONDS);
+        service.shutdown();
     }
 
     @Override
