@@ -20,7 +20,7 @@ function setUpMidi(touchKey, releaseKey) {
 
 function playNote(note, duration) {
   if (duration !== undefined) {
-    SoundModule.playNote(note, duration);
+    SoundModule.playNoteWithDuration(note, duration);
   } else {
     SoundModule.playNote(note);
   }
