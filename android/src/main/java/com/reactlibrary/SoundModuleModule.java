@@ -36,6 +36,11 @@ public class SoundModuleModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void playNote(int note, long duration){
+        soundPlayer.playNote(note, duration);
+    }
+
+    @ReactMethod
     public void stopNote(int note) {
         soundPlayer.noteOff(note);
     }

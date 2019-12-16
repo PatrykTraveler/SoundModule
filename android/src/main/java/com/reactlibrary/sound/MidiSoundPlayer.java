@@ -2,6 +2,10 @@ package com.reactlibrary.sound;
 
 import org.billthefarmer.mididriver.MidiDriver;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class MidiSoundPlayer implements SoundPlayer {
     private int NOTE_ON = 0x90;
     private int NOTE_OFF = 0x80;
@@ -15,6 +19,20 @@ public class MidiSoundPlayer implements SoundPlayer {
     }
 
     @Override
+    public void playNote(final int note, long duration) {
+        ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
+        Runnable noteOffTask = new Runnable() {
+            @Override
+            public void run() {
+                sendMidi(NOTE_OFF, note, MIN_VELOCITY);
+            }
+        };
+
+        sendMidi(NOTE_ON, note, MAX_VELOCITY);
+        service.schedule(noteOffTask, duration, TimeUnit.MILLISECONDS);
+    }
+
+    @Override
     public void noteOn(int note) {
         sendMidi(NOTE_ON, note, MAX_VELOCITY);
     }
@@ -24,7 +42,7 @@ public class MidiSoundPlayer implements SoundPlayer {
         sendMidi(NOTE_OFF, note, MIN_VELOCITY);
     }
 
-    public void sendMidi(int event, int note, int velocity) {
+    public synchronized void sendMidi(int event, int note, int velocity) {
         byte[] msg = new byte[3];
 
         msg[0] = (byte) event;
